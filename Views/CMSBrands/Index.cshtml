@@ -14,12 +14,12 @@
     <div class="row justify-content-center">
         <table class="table mt-3">
             <thead>
-                <tr>
+            <tr>
                    
-                    <th class="">@Html.DisplayNameFor(model => model.Name)</th>
-                    <th class="">@Html.DisplayNameFor(model => model.DeviceCount)</th>
-                    <th class="">Akcia</th>
-                </tr>
+                <th class="">@Html.DisplayNameFor(model => model.Name)</th>
+                <th class="">@Html.DisplayNameFor(model => model.SeriesList.Count)</th>
+                <th class="">Akcia</th>
+            </tr>
             </thead>
             <tbody>
             </tbody>
@@ -31,7 +31,7 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.DeviceCount)
+                        @Html.DisplayFor(modelItem => item.SeriesList.Count)
                         <a asp-controller="CMSSeries" asp-action="Index" class="btn btn-outline-primary m-2" asp-route-id="@item.Id">Zobraziť zariadenia</a>
                     </td>
                     <td class="align-middle">
@@ -48,8 +48,3 @@
         </table>
     </div>
 </div>
-
-
-
-
-

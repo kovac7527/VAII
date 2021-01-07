@@ -15,6 +15,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
+                <label asp-for="DeviceBrandId" class="control-label"></label>
+                <select asp-for="DeviceBrandId" class="form-control" asp-items="ViewBag.DeviceBrandId"></select>
+                <span asp-validation-for="DeviceBrandId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
@@ -23,11 +28,6 @@
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeviceCount" class="control-label"></label>
-                <input asp-for="DeviceCount" class="form-control" />
-                <span asp-validation-for="DeviceCount" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -5,37 +5,54 @@
     Layout = "~/Views/Shared/_AdminCMSLayout.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>Series</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeviceCount" class="control-label"></label>
-                <input asp-for="DeviceCount" class="form-control" />
-                <span asp-validation-for="DeviceCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+
+<div class="container">
+    @ViewBag.BrandName
+    <h2 class="mt-5">Vytvorenie novej série</h2>
+    <hr>
+    <form asp-action="Create" asp-route-id="@ViewBag.BrandId" class="col-md-4" method="post" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="DeviceBrandId"></label>
+            <input asp-for="DeviceBrandId" type="text" value="@ViewBag.BrandId" class="form-control" placeholder="Zadaj názov novej série" disabled="disabled">
+        </div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" type="text" class="form-control" placeholder="Zadaj názov novej série" required>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" type="text" class="form-control" placeholder="Zadaj popis">
+
+        </div>
+        <button type="submit" class="btn btn-primary">Vytvoriť</button>
+
+    </form>
+
+    <script>
+        // Disable form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load',
+                function() {
+                    // Get the forms we want to add validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms,
+                        function(form) {
+                            form.addEventListener('submit',
+                                function(event) {
+                                    if (form.checkValidity() === false) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                    }
+                                    form.classList.add('was-validated');
+                                },
+                                false);
+                        });
+                },
+                false);
+        })();
+    </script>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

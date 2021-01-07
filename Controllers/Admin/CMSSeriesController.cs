@@ -19,13 +19,15 @@ namespace VAII.Controllers.Admin
             _context = context;
         }
 
-        // GET: CMSSeries
-        public async Task<IActionResult> Index()
+        // GET: Series
+        public async Task<IActionResult> Index(int? id)
         {
-            return View(await _context.BrandSeries.ToListAsync());
+            ViewBag.BrandID = id;
+            ViewBag.BrandName = _context.DeviceBrands.FirstOrDefault(b => b.Id == id)?.Name;
+            return View(await _context.BrandSeries.Where(bs=> bs.DeviceBrandId == id ).ToListAsync());
         }
 
-        // GET: CMSSeries/Details/5
+        // GET: Series/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,29 +45,44 @@ namespace VAII.Controllers.Admin
             return View(series);
         }
 
-        // GET: CMSSeries/Create
-        public IActionResult Create()
+        // GET: Series/Create
+        public IActionResult Create(int? id)
         {
+            if (_context.DeviceBrands.FirstOrDefault(b => b.Id == id) == null)
+            {
+                return RedirectToAction("Index", "CMSBrands");
+            }
+
+            ViewBag.BrandID = id;
+            ViewBag.BrandName = _context.DeviceBrands.FirstOrDefault(b => b.Id == id)?.Name;
             return View();
         }
 
-        // POST: CMSSeries/Create
+        // POST: Series/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,DeviceCount")] Series series)
+        public async Task<IActionResult> Create([Bind("Name,Description,DeviceBrandId")] Series series, int? id)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(series);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(series);
+           DeviceBrand brand = _context.DeviceBrands.FirstOrDefault(b => b.Id == id);
+           brand.SeriesList = new List<Series>();
+           
+           if (brand != null)
+           {
+               brand.SeriesList.Add(series);
+               
+               await _context.SaveChangesAsync();
+               return RedirectToAction("Index", new{ id = id });
+           }
+
+           
+            
+           
+           return View(series);
         }
 
-        // GET: CMSSeries/Edit/5
+        // GET: Series/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,12 +98,12 @@ namespace VAII.Controllers.Admin
             return View(series);
         }
 
-        // POST: CMSSeries/Edit/5
+        // POST: Series/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,DeviceCount")] Series series)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DeviceBrandId,Name,Description")] Series series)
         {
             if (id != series.Id)
             {
@@ -116,7 +133,7 @@ namespace VAII.Controllers.Admin
             return View(series);
         }
 
-        // GET: CMSSeries/Delete/5
+        // GET: Series/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +151,7 @@ namespace VAII.Controllers.Admin
             return View(series);
         }
 
-        // POST: CMSSeries/Delete/5
+        // POST: Series/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
