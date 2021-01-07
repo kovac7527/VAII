@@ -1,0 +1,70 @@
+﻿@model DataAccesLib.Models.ServisDevice
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminCMSLayout.cshtml";
+}
+
+
+<div class="container">
+    @ViewBag.SeriesName
+    <h2 class="mt-5">Vytvorenie nového zariadenia</h2>
+    <hr>
+    <form asp-action="Create" asp-route-id="@ViewBag.SeriesId" class="col-md-4" method="post" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="SeriesId"></label>
+            <input asp-for="SeriesId" type="text" value="@ViewBag.SeriesId" class="form-control" disabled="disabled">
+        </div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" type="text" class="form-control" placeholder="Zadaj názov zaradenia" required>
+        </div>
+        <div class="form-group">
+            <label asp-for="Model"></label>
+            <input asp-for="Model" type="text" class="form-control" placeholder="Zadaj kód označenia modelu" required>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImagePath"></label>
+            <input asp-for="ImagePath" type="file" class="form-control" >
+        </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" type="text" class="form-control" placeholder="Zadaj popis" rows="10">
+        </div>
+        <button type="submit" class="btn btn-primary">Vytvoriť</button>
+
+    </form>
+
+    <div>
+        <a asp-action="Index" asp-route-id="@ViewBag.SeriesID">Back to List</a>
+    </div>
+    <script>
+        // Disable form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load',
+                function () {
+                    // Get the forms we want to add validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms,
+                        function (form) {
+                            form.addEventListener('submit',
+                                function (event) {
+                                    if (form.checkValidity() === false) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                    }
+                                    form.classList.add('was-validated');
+                                },
+                                false);
+                        });
+                },
+                false);
+        })();
+    </script>
+</div>
+
+
