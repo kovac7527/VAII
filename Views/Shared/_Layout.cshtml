@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @*@Styles.Render("~/Content/css")*@
+   
+    
+
+    <link href="~/Content/styles/bootstrap-4.5.3-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Content/font_awesome/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="~/Content/styles/styles.css">   
+    
+    <script src="~/Content/js/jQuery.js"></script>
+    <script src="~/Content/styles/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("Styles", false)
+
+</head>
+<body>
+
+    <!--    navigation bar    -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="navbar-brand">
+        <h3>@Html.ActionLink("Smart Medic", "Index", "Home")</h3>
+    </div>
+   
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <div class="nav-link"> @Html.ActionLink("Servis", "Index", "Servis")</div>
+            </li>
+            <li class="nav-item active">
+                <div class="nav-link"> @Html.ActionLink("Smart news", "SmartNews", "Home")</div>
+            </li>
+            <li class="nav-item active">
+                <div class="nav-link"> @Html.ActionLink("O nás", "About", "Home")</div>
+            </li>
+            <li class="nav-item active">
+                <div class="nav-link"> @Html.ActionLink("Kontakt", "Contact", "Home")</div>
+            </li>
+
+        </ul>
+
+    </div>
+</nav>
+    <!--end of navigation bar -->
+
+    <!--Main page -->
+    @RenderBody()
+    <!--end of main page -->
+
+    <!--page footer-->
+    <footer class="page-footer">
+        <div class="container">
+
+            <div class="row py-3 d-flex align-items-center">
+
+
+                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                    <h5 class="mb-0">Follow us on social networks!</h5>
+                </div>
+                <div class="col-md-6 col-lg-7 text-center text-md-right t">
+
+                    <!-- Facebook -->
+                    <a>
+                        <i class="fa fa-facebook-square text-white mr-2"> </i>
+                    </a>
+                    <!-- Twitter -->
+                    <a>
+                        <i class="fa fa-twitter-square text-white mr-2"> </i>
+                    </a>
+                    <!--Instagram-->
+                    <a>
+                        <i class="fa fa-instagram text-white mr-2"> </i>
+                    </a>
+
+                </div>
+                <!-- Grid column -->
+            </div>
+
+        </div>
+
+        <div class="container-fluid  footer-description">
+            <div class="container">
+                <div class="row pb-0 pt-2 text-align-center text-white  d-flex ">
+                    <div class="col-md-4 footer-column">
+                        <h5>Autor</h5>
+                        <p>
+                            Ján Kováč <i class="fa fa-copyright"></i><br>
+                        </p>
+                    </div>
+                    <div class="col-md-4 footer-column">
+                        <h5>Kontakt</h5>
+                        <p>
+                            <address>
+                                <a href="mailto:profix@profix.com"> Pro Fix s.r.o. </a> <br>
+                                Daniela Dlabača 24 <br>
+                                010 01 Žilina  Slovensko <br>
+
+                            </address>
+                            <a href="tel:+421902437369">0902 437 369</a>
+
+                    </div>
+                    <div class="col-md-4 footer-column">
+                        <h5>Rýchle odkazy</h5>
+                        <p>Nothing to display here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

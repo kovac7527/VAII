@@ -1,0 +1,171 @@
+@media only screen and (max-width: 767px) {
+    .flex-row {
+        position: relative;
+        margin: 1em;
+        overflow: hidden;
+    }
+    .flex-row .product-item {
+        flex-grow: 8;
+        margin: 25px;
+        text-align: center;
+        border-bottom: 2px solid #007bff;
+        background-color: #fff;
+    }
+}
+
+
+body{
+    margin-top: 4.5rem;
+}
+
+.product-filter{
+    background-color: #20c997;
+    margin-top: 5rem;
+    margin-bottom: 50px;
+}
+
+.product-item {
+    margin-bottom: 30px;
+}
+
+.product-image{
+    margin: auto;
+    height: 100%;
+
+}
+
+.product-item .img-section {
+    margin-bottom: 15px;
+}
+.navbar h3{
+    border-bottom: 5px solid;
+    border-radius: 5px;
+    border-color: #007bff; /*rgba(0,39,84,0.98)*/
+}
+a {
+    color:inherit;
+    text-decoration: none;
+}
+.page-footer .fa {
+    font-size: 40px;
+}
+
+
+.carousel {
+    max-width: 500rem;
+    margin-bottom: 50px;
+
+}
+#samsung-image{
+    max-width: 100%;
+
+}
+
+#company-logo-img{
+    width: 100%;
+    max-width: 350px;
+
+
+
+
+}
+
+#index-repair{
+    max-width: 100%;
+
+}
+
+h3{
+    border-bottom: 5px solid #bbb;
+    border-radius: 5px;
+}
+
+.text-align-center{
+    text-align: center;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.counter-box {
+    display: block;
+    background: #f6f6f6;
+    padding: 40px 20px 37px;
+    text-align: center;
+    border-radius: 25px;
+    margin-bottom: 0.5rem ;
+
+}
+
+.counter-box p {
+    margin: 5px 0 0;
+    padding: 0;
+    color: #909090;
+    font-size: 18px;
+    font-weight: 500
+
+}
+
+.counter-box i {
+    font-size: 60px;
+    margin: 0 0 15px;
+    color: #d2d2d2
+}
+
+.counter {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+    color: #666;
+    line-height: 28px
+}
+
+.counter-box.highlighted {
+    background: #007bff;
+}
+
+.page-footer{
+    background-color: #007bff;
+    margin-top: 50px;
+
+}
+
+.page-footer h5 {
+    color: #f8f9fa ;
+}
+
+.page-footer .footer-description{
+    background-color: rgba(0,39,84,0.98);
+}
+
+.footer-description address {
+    margin-top: 1px;
+}
+
+.footer-description {
+    padding-bottom: 20px;
+}
+
+.page-footer .footer-description .fa {
+    font-size: 15px;
+}
+
+.page-footer .footer-description h5{
+    font-size: medium;
+    border-bottom: 2px solid #bbb;
+
+}
+
+.page-footer .footer-description .footer-column{
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+
+/*
+************************************/

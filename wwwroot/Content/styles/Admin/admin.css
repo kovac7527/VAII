@@ -1,0 +1,35 @@
+ html, body {
+    height: 100%;
+     background-image: url("../../img/logo/admin_background.jpg");
+     background-repeat: no-repeat;
+     background-size: cover;
+
+}
+
+.errormessage {
+    color: rgba(228,0,17,0.98);
+    font-weight: bold;
+
+}
+
+ .wrapper {
+     display: flex;
+     width: 100%;
+     align-items: stretch;
+ }
+
+ .admin_login_input {
+     width: 180px;
+     text-align:center;
+     font-style:italic;
+ }
+
+.admin_login_btn {
+    width: 80%;
+    font-weight: bold;
+}
+
+ .cms-welcome {
+     margin-top: 20px;
+ }
+

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VAII", "VAII.csproj", "{2AEA8FFB-BC28-4024-8890-C8222148AEDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccesLib", "..\DataAccesLib\DataAccesLib.csproj", "{08113618-D5E0-4000-A707-683285CB77B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2AEA8FFB-BC28-4024-8890-C8222148AEDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AEA8FFB-BC28-4024-8890-C8222148AEDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AEA8FFB-BC28-4024-8890-C8222148AEDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AEA8FFB-BC28-4024-8890-C8222148AEDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08113618-D5E0-4000-A707-683285CB77B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08113618-D5E0-4000-A707-683285CB77B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08113618-D5E0-4000-A707-683285CB77B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08113618-D5E0-4000-A707-683285CB77B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98305A71-20E2-477A-A941-29127A14C053}
+	EndGlobalSection
+EndGlobal

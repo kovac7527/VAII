@@ -1,0 +1,48 @@
+﻿@model DataAccesLib.Models.DeviceBrand
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminCMSLayout.cshtml";
+}
+
+<div class="container">
+    <h2 class="mt-5">Vytvorenie novej značky</h2>
+    <hr>
+    <form asp-action="Create" class="col-md-4" method="post" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" type="text" class="form-control"  placeholder="Zadaj názov značky" required>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImageLogoPath"></label>
+            <input asp-for="ImageLogoPath" type="file" class="d-block"  >
+
+        </div>
+        <button type="submit" value="Create" class="btn btn-primary">Pridať</button>
+
+    </form>
+
+    <script>
+        // Disable form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Get the forms we want to add validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+</div>
+
+

@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Http
+@model object
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_AdminCMSLayout";
+}
+
+
+<main>
+    <div class="container">
+        <div class="jumbotron cms-welcome">
+            <h1 class="display-4 text-center"> "@TempData["User"]" vitaj v systéme  CMS !!! </h1>
+            <p class="lead text-center">tento systém slúži na správu obsahu tvojej webovej aplikácie</p>
+            <hr class="my-5">
+            <p class="text-center">V prípade otázok kontaktuj svojho admina.</p>
+
+        </div>
+    </div>
+</main>

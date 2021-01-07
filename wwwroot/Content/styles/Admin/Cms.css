@@ -1,0 +1,26 @@
+body {
+
+
+}
+
+
+.navbar-fixed-top {
+    position: relative;
+}
+
+.navbar h3 {
+    border-bottom: 5px solid;
+    border-radius: 5px;
+    border-color: firebrick;
+    text-align: center;
+
+}
+.nav-link {
+    color: inherit; !important;
+    text-decoration: none;
+}
+
+
+.text-success {
+    color: #007bff;
+}
