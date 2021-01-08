@@ -5,12 +5,21 @@
     Layout = "~/Views/Shared/_AdminCMSLayout.cshtml";
 }
 
-<h1>Details</h1>
 
-<div>
+
+
+
+<div class="container">
+    @ViewBag.BrandName
     <h4>Series</h4>
     <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            Značka
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.BrandName
+        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -24,8 +33,10 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index" asp-route-id="@Model.DeviceBrandId">Back to List</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

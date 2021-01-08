@@ -37,6 +37,8 @@ namespace VAII.Controllers.Admin
 
             var series = await _context.BrandSeries
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            ViewBag.BrandName = _context.DeviceBrands.FirstOrDefault(b => b.Id == series.DeviceBrandId)?.Name;
             if (series == null)
             {
                 return NotFound();

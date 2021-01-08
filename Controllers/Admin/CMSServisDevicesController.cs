@@ -1,21 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccesLib.DataAccess;
 using DataAccesLib.Models;
+using System.Web;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace VAII.Controllers.Admin
 {
-    public class CMSServisDevicesController : Controller
+    public class CMSServisDevicesController : Controller 
     {
         private readonly DataContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CMSServisDevicesController(DataContext context)
+        public CMSServisDevicesController(DataContext context, IWebHostEnvironment webHostEnvironment)
         {
+            _webHostEnvironment= webHostEnvironment;
             _context = context;
         }
 
@@ -170,6 +177,39 @@ namespace VAII.Controllers.Admin
         private bool ServisDeviceExists(int id)
         {
             return _context.ServisDevices.Any(e => e.Id == id);
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> InsertImage(IFormFile imgFile)
+        {
+
+            if (imgFile != null && imgFile.Length != 0)
+            {
+                
+                var path = Path.Combine(
+                    Directory.GetCurrentDirectory(), "wwwroot", "UploadedImgs","ServisDevices",
+                    imgFile.FileName);
+
+                if (!System.IO.File.Exists(path))
+                {
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await imgFile.CopyToAsync(stream);
+                    }
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+                
+            }
+
+            return BadRequest();
+
+
         }
     }
 }

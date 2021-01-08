@@ -19,4 +19,8 @@
     <ProjectReference Include="..\DataAccesLib\DataAccesLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\UploadedImgs\ServisDevices\" />
+  </ItemGroup>
+
 </Project>

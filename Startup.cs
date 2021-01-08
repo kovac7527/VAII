@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using  DataAccesLib.DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 
 namespace VAII
 {
@@ -31,6 +32,7 @@ namespace VAII
                 }
                 );
             services.AddControllersWithViews();
+            
             services.AddSession();
 
         }

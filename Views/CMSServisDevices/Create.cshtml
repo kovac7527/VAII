@@ -25,46 +25,134 @@
             <label asp-for="Model"></label>
             <input asp-for="Model" type="text" class="form-control" placeholder="Zadaj kód označenia modelu" required>
         </div>
-        <div class="form-group">
-            <label asp-for="ImagePath"></label>
-            <input asp-for="ImagePath" type="file" class="form-control" >
-        </div>
+
         <div class="form-group">
             <label asp-for="Description"></label>
             <input asp-for="Description" type="text" class="form-control" placeholder="Zadaj popis" rows="10">
         </div>
+        <div class="col-md-9 form-group">
+
+
+
+            <div class="btn btn-primary mt-2 mb-2">
+                <input asp-for="ImagePath" type="file" id="imguploader" />
+            </div>
+
+
+            <div id="imgPreview" class="thumbnail" style="display:none">
+                <img class="img-responsive" id="targetImg"   width="400" height="400" />
+                <div class="caption">
+                    <a href="#" onclick="ClearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
+                    <span id="description"></span>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="row justify-content-md-between">
+            <button id="btnUpload" type="button"  class="d-block btn btn-outline-success m-3 left">Nahrať obrázok</button>
+            <div  id="messageUpload" class="col-md-auto mx-auto">
+            </div>
+        </div>
+        
+
         <button type="submit" class="btn btn-primary">Vytvoriť</button>
 
     </form>
 
+
+    @*<input type="imgFile" name="imguploader" id="imguploader" />*@
+
+
+   
+
     <div>
         <a asp-action="Index" asp-route-id="@ViewBag.SeriesID">Back to List</a>
     </div>
-    <script>
-        // Disable form submissions if there are invalid fields
-        (function () {
-            'use strict';
-            window.addEventListener('load',
-                function () {
-                    // Get the forms we want to add validation styles to
-                    var forms = document.getElementsByClassName('needs-validation');
-                    // Loop over them and prevent submission
-                    var validation = Array.prototype.filter.call(forms,
-                        function (form) {
-                            form.addEventListener('submit',
-                                function (event) {
-                                    if (form.checkValidity() === false) {
-                                        event.preventDefault();
-                                        event.stopPropagation();
-                                    }
-                                    form.classList.add('was-validated');
-                                },
-                                false);
-                        });
-                },
-                false);
-        })();
-    </script>
+
 </div>
 
 
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("#imguploader").change(function () {
+
+            var File = this.files;
+
+            if (File && File[0]) {
+                ReadImage(File[0]);
+            }
+
+        })
+
+    })
+
+
+    var ReadImage = function (file) {
+
+        var reader = new FileReader;
+        var image = new Image;
+
+        reader.readAsDataURL(file);
+        reader.onload = function (_file) {
+
+            image.src = _file.target.result;
+            image.onload = function () {
+
+                var height = this.height;
+                var width = this.width;
+                var type = file.type;
+                var size = ~~(file.size / 1024) + "KB";
+
+                $("#targetImg").attr('src', _file.target.result);
+                $("#description").text("Size:" + size + ", " + height + "X " + width + ", " + type + "");
+                $("#imgPreview").show();
+
+            }
+
+        }
+
+    }
+
+    var ClearPreview = function () {
+        $("#messageUpload").val('');
+        $("#description").text('');
+        $("#imgPreview").hide();
+
+    }
+
+
+    $("#btnUpload").on("click", function () {
+
+        var imgFile = $("#imguploader")[0].files[0];
+
+        var data = new FormData();
+        data.append("imgFile", imgFile);
+        data.append("DeviceName", "SamsungS10");
+            
+
+        $.ajax({
+            type: "Post",
+            url: "@Url.Action("InsertImage")",
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                $("#messageUpload").empty();
+                $("#messageUpload").append('<p class="alert-success"> Obrázok nahratý </p>');
+                alert('Obrázok úspešne nahratý na server !');
+            },
+            error: function (error) {
+                $("#messageUpload").empty();
+                $("#messageUpload").append('<p class="alert-danger mx-auto"> Obrázok už existuje </p>');
+                alert("Obrázok už existuje !");
+            }
+        });
+
+    });
+</script>
