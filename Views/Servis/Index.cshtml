@@ -1,4 +1,6 @@
-﻿
+﻿@model VAII.Models.ServisModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
     ViewBag.Title = "Index";
 }
@@ -13,46 +15,45 @@
                 <div class="col-md">
 
                     <label for="device_brand_selection">Značka zariadenia:</label>
-                    <select class="form-control" id="device_brand_selection">
-                        <option>Samsung</option>
-                        <option>Apple</option>
-                        <option>Huawei</option>
-                        <option>Xiaomi</option>
-                        <option>Lenovo</option>
-                        <option>Motorola</option>
-                        <option>ZTE</option>
-                        <option>Sony</option>
-                        <option>LG</option>
-                    </select>
+                    @Html.DropDownList("Brand", ViewBag.Brands as List<SelectListItem>,new
+                    {
+                       @class ="form-control"
+
+                    })
+                    @*<select class="form-control" id="device_brand_selection">
+                        @foreach(var item in Model.DeviceBrands)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        
+                    </select>*@
 
                 </div>
 
                 <div class="col-md">
                     <label for="device_series_selection">Séria zariadenia</label>
-                    <select class="form-control" id="device_series_selection">
-                        <option>S</option>
-                        <option>Note</option>
-                        <option>J</option>
-                        <option>M</option>
-                        <option>X Cover</option>
-                    </select>
+                   @Html.DropDownList("Series", new SelectList(string.Empty, "Value", "Text"), new
+                   {
+                       @class ="form-control"
+
+                   })
+                    <!--<select class="form-control" id="Series">-->
+                        @*@foreach (var item in Model.DeviceSeries)
+                        {
+                         <option value="@item.Id">@item.Name</option>
+                        }*@
+                        
+                    <!--</select>-->
 
                 </div>
 
                 <div class="col-md">
                     <label for="device_model_selection">ModelCode</label>
                     <select class="form-control" id="device_model_selection">
-                        <option>Galaxy S20</option>
-                        <option>Galaxy S20 +</option>
-                        <option>Galaxy S20 Ultra</option>
-                        <option>Galaxy S10</option>
-                        <option>Galaxy S10 +</option>
-                        <option>Galaxy S9</option>
-                        <option>Galaxy S9 +</option>
-                        <option>Galaxy S8</option>
-                        <option>Galaxy S8 +</option>
-                        <option>Galaxy S7</option>
-                        <option>Galaxy S7 edge</option>
+                        @*@foreach (var item in Model.DeviceSeries)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }*@
 
                     </select>
 
@@ -64,116 +65,75 @@
 </div>
 
 <div class="container align-items-center">
-    <div class="row flex-row">
+    <div class="row flex-row" id="ServisDevices">
 
-
-        <div class="col-md-3 d-md-inline-block product-item">
-
-            <div class="col-md-12 img-section d-flex ">
-                <img class="product-image" src="~/Content/img/products/Galaxy_S20_ultra.webp" alt="Product image">
-            </div>
-            <div class="col-md-12  image-title text-align-center">
-                <h4>Galaxy S20 ultra</h4>
-            </div>
-            <!--            <div class="col-md-12  image-description text-align-center">-->
-            <!--                <p>Lorem ipsum dolor sed do eiusmod tempor incididunt ut labore et ...</p>-->
-            <!--            </div>-->
-        </div>
-
-        <div class="col-md-3 d-inline-block product-item">
-
-            <div class="col-md-12 img-section d-flex ">
-                <img class="product-image" src="~/Content/img/products/Galaxy_S20_FE.webp" alt="Product image">
-            </div>
-            <div class="col-md-12  image-title text-align-center">
-                <h4>Galaxy S20 FE</h4>
-            </div>
-            <!--            <div class="col-md-12  image-description text-align-center">-->
-            <!--                <p>Lorem ipsum dolor sed do eiusmod tempor incididunt ut labore et ...</p>-->
-            <!--            </div>-->
-        </div>
-
-        <div class="col-md-3 d-inline-block product-item">
-
-            <div class="col-md-12 img-section d-flex ">
-                <img class="product-image" src="~/Content/img/products/Galaxy_Note_20_Ultra.webp" alt="Product image">
-            </div>
-            <div class="col-md-12  image-title text-align-center">
-                <h4>Galaxy Note 20</h4>
-            </div>
-            <!--            <div class="col-md-12  image-description text-align-center">-->
-            <!--                <p>Lorem ipsum dolor sed do eiusmod tempor incididunt ut labore et ...</p>-->
-            <!--            </div>-->
-        </div>
-
-        <div class="col-md-3 d-inline-block product-item">
-
-            <div class="col-md-12 img-section d-flex ">
-                <img class="product-image" src="~/Content/img/products/Galaxy_Note_20.webp" alt="Product image">
-            </div>
-            <div class="col-md-12  image-title text-align-center">
-                <h4>Galaxy Note 20 </h4>
-            </div>
-            <!--            <div class="col-md-12  image-description text-align-center">-->
-            <!--                <p>Lorem ipsum dolor sed do eiusmod tempor incididunt ut labore et ...</p>-->
-            <!--            </div>-->
-        </div>
-
-        <div class="col-md-3 d-inline-block product-item">
-
-            <div class="col-md-12 img-section d-flex ">
-                <img class="product-image" src="~/Content/img/products/Galaxy_Z_Fold_2.webp" alt="Product image">
-            </div>
-            <div class="col-md-12  image-title text-align-center">
-                <h4>Galaxy Note 20 ULTRA </h4>
-            </div>
-            <!--            <div class="col-md-12  image-description text-align-center">-->
-            <!--                <p>Lorem ipsum dolor sed do eiusmod tempor incididunt ut labore et ...</p>-->
-            <!--            </div>-->
-        </div>
-
-        <div class="col-md-3 d-inline-block product-item">
-
-            <div class="col-md-12 img-section d-flex ">
-                <img class="product-image" src="~/Content/img/products/Galaxy_S20_plus.webp" alt="Product image">
-            </div>
-            <div class="col-md-12  image-title text-align-center">
-                <h4>Galaxy S20 +</h4>
-            </div>
-            <!--            <div class="col-md-12  image-description text-align-center">-->
-            <!--                <p>Lorem ipsum dolor sed do eiusmod tempor incididunt ut labore et ...</p>-->
-            <!--            </div>-->
-        </div>
-
-        <div class="col-md-3 d-inline-block product-item">
-
-            <div class="col-md-12 img-section d-flex ">
-                <img class="product-image" src="~/Content/img/products/Galaxy_S20.webp" alt="Product image">
-            </div>
-            <div class="col-md-12  image-title text-align-center">
-                <h4>Galaxy S20</h4>
-            </div>
-            <!--            <div class="col-md-12  image-description text-align-center">-->
-            <!--                <p>Lorem ipsum dolor sed do eiusmod tempor incididunt ut labore et ...</p>-->
-            <!--            </div>-->
-        </div>
-
-        <div class="col-md-3 d-inline-block product-item">
-
-            <div class="col-md-12 img-section d-flex ">
-                <img class="product-image" src="~/Content/img/products/Galaxy_note_10.webp" alt="Product image">
-            </div>
-            <div class="col-md-12  image-title text-align-center">
-                <h4>Galaxy Note 10</h4>
-            </div>
-            <!--            <div class="col-md-12  image-description text-align-center">-->
-            <!--                <p>Lorem ipsum dolor sed do eiusmod tempor incididunt ut labore et ...</p>-->
-            <!--            </div>-->
-        </div>
-
-
+       
 
 
     </div>
 
 </div>
+
+
+<script type="text/javascript">  
+  
+  
+    $(document).ready(function () {  
+  
+        $("#Brand").change(function () {  
+            $("#Series").empty();  
+            $.ajax({  
+                type: 'POST',  
+                url: '@Url.Action("GetSeries")',  
+                dataType: 'json',  
+                data: { id: $("#Brand").val() },  
+                success: function (series) {  
+  
+                    $.each(series, function (i, series) {  
+                        $("#Series").append('<option value="'  
+                            + series.value + '">'  
+                            + series.text + '</option>');  
+                    });  
+                },  
+                error: function (ex) {  
+                    alert('Failed.' + ex);  
+                }  
+            });  
+            return false;  
+        })  
+
+        $("#Series").change(function () {  
+            $("#ServisDevices").empty();  
+            $.ajax({  
+                type: 'POST',  
+                url: '@Url.Action("GetDevices")',  
+                dataType: 'json',  
+                data: { id: $("#Series").val() },  
+                success: function (device) {  
+  
+                    $.each(device, function (i, device) {  
+                        $("#ServisDevices").append('<div class="col-md-3 d-inline-block product-item">' +
+                            '<div class="col-md-12 img-section d-flex ">' +
+                            '<img id="product-image" src="/UploadedImgs/ServisDevices/'+ device.imagePath +  '" alt="Product image" >'+
+                            '</div>'+
+                            '<div class="col-md-12  image-title text-align-center">'+
+                            '<h4>'+device.name+'</h4>'+
+                            '</div>'+
+                            '</div>');  
+
+
+
+
+
+                    });  
+                },  
+                error: function (ex) {  
+                    alert('Failed.' + ex);  
+                }  
+            });  
+            return false;  
+        })  
+    });  
+</script>   
+
+

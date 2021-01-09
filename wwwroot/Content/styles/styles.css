@@ -14,8 +14,9 @@
 }
 
 
-body{
+body {
     margin-top: 4.5rem;
+    
 }
 
 .product-filter{
@@ -28,10 +29,11 @@ body{
     margin-bottom: 30px;
 }
 
-.product-image{
+#product-image {
     margin: auto;
     height: 100%;
-
+    max-width: 125px;
+    max-height: 125px;
 }
 
 .product-item .img-section {
@@ -129,10 +131,29 @@ h3{
     background: #007bff;
 }
 
-.page-footer{
+
+
+.main-content {
+    margin-bottom: 250px;
+   
+    position: relative;
+}
+
+.footer-down {
+    
+}
+
+footer {
+    background: #f5b335;    
+    position: fixed;
+    bottom: 0;
+    transition: bottom 0.2s ease-in-out;
+    width: 100%;
+}
+
+.page-footer {
     background-color: #007bff;
     margin-top: 50px;
-
 }
 
 .page-footer h5 {
