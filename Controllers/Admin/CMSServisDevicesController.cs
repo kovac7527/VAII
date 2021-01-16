@@ -31,7 +31,14 @@ namespace VAII.Controllers.Admin
         {
 
             ViewBag.SeriesId = id;
-            ViewBag.SeriesName = _context.BrandSeries.FirstOrDefault(b => b.Id == id)?.Name;
+            var series = _context.BrandSeries.FirstOrDefault(b => b.Id == id);
+            if (series != null)
+            {
+                ViewBag.SeriesName = series.Name;
+                ViewBag.BrandId = series.DeviceBrandId;
+                ViewBag.BrandName = _context.DeviceBrands.FirstOrDefault(b => b.Id == series.DeviceBrandId)?.Name;
+            }
+
             return View(await _context.ServisDevices.Where(s=>s.SeriesId == id).ToListAsync());
             
         }

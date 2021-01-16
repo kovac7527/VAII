@@ -11,8 +11,8 @@
             <h2>Product filter</h2>
         </div>
         <div class="form-group pb-3">
-            <div class="row">
-                <div class="col-md">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
 
                     <label for="device_brand_selection">Značka zariadenia:</label>
                     @Html.DropDownList("Brand", ViewBag.Brands as List<SelectListItem>,new
@@ -30,7 +30,7 @@
 
                 </div>
 
-                <div class="col-md">
+                <div class=" col-md-4">
                     <label for="device_series_selection">Séria zariadenia</label>
                    @Html.DropDownList("Series", new SelectList(string.Empty, "Value", "Text"), new
                    {
@@ -47,17 +47,6 @@
 
                 </div>
 
-                <div class="col-md">
-                    <label for="device_model_selection">ModelCode</label>
-                    <select class="form-control" id="device_model_selection">
-                        @*@foreach (var item in Model.DeviceSeries)
-                        {
-                            <option value="@item.Id">@item.Name</option>
-                        }*@
-
-                    </select>
-
-                </div>
 
             </div>
         </div>

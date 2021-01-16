@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Newtonsoft.Json
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @model DataAccesLib.Models.AdminUser
 @{
@@ -34,13 +35,15 @@
                     <button type="submit" class="btn btn-primary btn-block admin_login_btn mx-auto" name="admin-sing-in">Prihlásiť</button>
                 </div>
             </div>
+            <p class="text-center mt-2"><a asp-controller="Home" asp-action="Index">Späť na hlavnú Stránku</a></p>
             <p class="text-center"><a href="mailto:kovacj.jan@gmail.com?subject=AdminSupport">Kontaktuj admina</a></p>
+            
         }
 
 
-      
 
-        
+
+
     </div>
 
 </div>

@@ -22,7 +22,7 @@ namespace VAII.Controllers.Admin
         // GET: Series
         public async Task<IActionResult> Index(int? id)
         {
-            ViewBag.BrandID = id;
+            ViewBag.BrandId = id;
             ViewBag.BrandName = _context.DeviceBrands.FirstOrDefault(b => b.Id == id)?.Name;
             return View(await _context.BrandSeries.Where(bs=> bs.DeviceBrandId == id ).ToListAsync());
         }

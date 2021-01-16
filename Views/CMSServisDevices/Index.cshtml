@@ -8,17 +8,22 @@
 
 
 <div class="container">
-    @ViewBag.SeriesName
-    <a asp-action="Create" class="btn btn-success mt-2" asp-route-id="@ViewBag.SeriesID">Pridať zariadenie</a>
+    <h2>@ViewBag.BrandName @ViewBag.SeriesName</h2>
+    <div class=" row justify-content-between">
+        <div class="col-auto"><a asp-action="Create" class="btn btn-success mt-2" asp-route-id="@ViewBag.SeriesID">Pridať zariadenie</a></div>
+        <div class="col-auto"><a asp-action="Index" asp-controller="CMSSeries"asp-route-id="@ViewBag.BrandId" class="btn btn-outline-warning mt-2">Späť na série</a></div>
+    </div>
+   
+   
     <div class="row justify-content-center">
         <table class="table mt-3">
             <thead>
-                <tr>
+            <tr>
 
-                    <th class="">@Html.DisplayNameFor(model => model.Name)</th>
-                    <th class="">@Html.DisplayNameFor(model => model.Model)</th>
-                    <th class="">Akcia</th>
-                </tr>
+                <th class="">@Html.DisplayNameFor(model => model.Name)</th>
+                <th class="">@Html.DisplayNameFor(model => model.Model)</th>
+                <th class="">Akcia</th>
+            </tr>
             </thead>
             <tbody>
             </tbody>

@@ -5,12 +5,10 @@
     Layout = "~/Views/Shared/_AdminCMSLayout.cshtml";
 }
 
-<h1>Edit</h1>
 
-<h4>ServisDevice</h4>
     <hr />
     <div class="container">
-       
+        <h2 class="text-align-center">Úprava zariadenia</h2>
         <form asp-action="Edit">
             <div class="row">
                 <div class="col-md-4">
@@ -63,7 +61,7 @@
                                     <input name="imguploader" type="file" id="imguploader" />
                                 </div>
 
-                                <div id="imgPreview" class="thumbnail" style="display: none">
+                                <div id="imgPreview" class="thumbnail" style="display:none">
                                     <img class="img-responsive" id="targetImg" width="250" height="250" />
                                     <div class="caption">
                                         <a href="#" onclick="ClearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
