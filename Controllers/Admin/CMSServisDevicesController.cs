@@ -115,11 +115,20 @@ namespace VAII.Controllers.Admin
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Model,Name,ImagePath,Type")] ServisDevice servisDevice)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,SeriesId,Model,Name,ImagePath,Type")] ServisDevice servisDevice, string imguploader)
         {
+            string newImage= HttpContext.Request.Form["imguploader"];
+
             if (id != servisDevice.Id)
             {
                 return NotFound();
+            }
+
+            if (!String.IsNullOrEmpty(newImage))
+            {
+                servisDevice.ImagePath = newImage;
+
+
             }
 
             if (ModelState.IsValid)
@@ -140,7 +149,7 @@ namespace VAII.Controllers.Admin
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                
             }
             return View(servisDevice);
         }
