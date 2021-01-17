@@ -13,10 +13,13 @@
     }
 }
 
+.BrandLogo-CMS {
+    max-width: 100%;
+    max-height: 200px;
+}
 
 body {
     margin-top: 4.5rem;
-    
 }
 
 .product-filter{

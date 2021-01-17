@@ -3,6 +3,9 @@ body {
 
 }
 
+tr:nth-child(even) {
+    background: whitesmoke
+}
 
 .navbar-fixed-top {
     position: relative;

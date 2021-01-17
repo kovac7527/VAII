@@ -36,7 +36,9 @@ namespace VAII.Controllers.Admin
             {
                 ViewBag.SeriesName = series.Name;
                 ViewBag.BrandId = series.DeviceBrandId;
-                ViewBag.BrandName = _context.DeviceBrands.FirstOrDefault(b => b.Id == series.DeviceBrandId)?.Name;
+                var brand = _context.DeviceBrands.FirstOrDefault(b => b.Id == series.DeviceBrandId);
+                ViewBag.BrandName = brand.Name;
+                ViewBag.BrandLogo = brand.ImageLogoPath;
             }
 
             return View(await _context.ServisDevices.Where(s=>s.SeriesId == id).ToListAsync());

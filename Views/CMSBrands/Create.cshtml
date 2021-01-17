@@ -6,24 +6,43 @@
 }
 
 <div class="container">
-    <h2 class="mt-5">Vytvorenie novej značky</h2>
-    <hr>
+    <hr class="mt-2" />
+    <div class="row justify-content-center">
+        <div class=" col-md-auto"><h2>Vytvorenie novej značky</h2></div>
+    </div>
+    <hr />
     <form asp-action="Create" class="col-md-4" method="post" novalidate>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Name"></label>
-            <input asp-for="Name" type="text" class="form-control"  placeholder="Zadaj názov značky" required>
+            <input asp-for="Name" type="text" class="form-control" placeholder="Zadaj názov značky" required>
         </div>
         <div class="form-group">
             <label asp-for="ImageLogoPath"></label>
-            <input asp-for="ImageLogoPath" type="file" class="d-block"  >
+            <div class="btn btn-primary mt-2 mb-2">
+                <input asp-for="ImageLogoPath" type="file" id="imguploader" />
+            </div>
 
+
+            <div id="imgPreview" class="thumbnail" style="display:none">
+                <img class="img-responsive" id="targetImg" width="400" height="400" />
+                <div class="caption">
+                    <a href="#" onclick="ClearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
+                    <span id="description"></span>
+                </div>
+
+            </div>
+        </div>
+        <div class="row justify-content-md-between">
+            <button id="btnUpload" type="button" class="d-block btn btn-outline-success m-3 left">Nahrať obrázok</button>
+            <div id="messageUpload" class="col-md-auto mx-auto">
+            </div>
         </div>
         <button type="submit" value="Create" class="btn btn-primary">Pridať</button>
 
     </form>
 
-    <script>
+    @*<script>
         // Disable form submissions if there are invalid fields
         (function () {
             'use strict';
@@ -42,7 +61,90 @@
                 });
             }, false);
         })();
-    </script>
+    </script>*@
 </div>
 
+
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("#imguploader").change(function () {
+
+            var File = this.files;
+
+            if (File && File[0]) {
+                ReadImage(File[0]);
+            }
+
+        })
+
+    })
+
+
+    var ReadImage = function (file) {
+
+        var reader = new FileReader;
+        var image = new Image;
+
+        reader.readAsDataURL(file);
+        reader.onload = function (_file) {
+
+            image.src = _file.target.result;
+            image.onload = function () {
+
+                var height = this.height;
+                var width = this.width;
+                var type = file.type;
+                var size = ~~(file.size / 1024) + "KB";
+
+                $("#targetImg").attr('src', _file.target.result);
+                $("#description").text("Size:" + size + ", " + height + "X " + width + ", " + type + "");
+                $("#imgPreview").show();
+
+            }
+
+        }
+
+    }
+
+    var ClearPreview = function () {
+        $("#messageUpload").val('');
+        $("#description").text('');
+        $("#imgPreview").hide();
+
+    }
+
+
+    $("#btnUpload").on("click", function () {
+
+        var imgFile = $("#imguploader")[0].files[0];
+
+        var data = new FormData();
+        data.append("imgFile", imgFile);
+        data.append("DeviceName", "SamsungS10");
+
+
+        $.ajax({
+            type: "Post",
+            url: "@Url.Action("InsertImage")",
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                $("#messageUpload").empty();
+                $("#messageUpload").append('<p class="alert-success"> Obrázok nahratý </p>');
+                alert('Obrázok úspešne nahratý na server !');
+            },
+            error: function (error) {
+                $("#messageUpload").empty();
+                $("#messageUpload").append('<p class="alert-danger mx-auto"> Obrázok už existuje </p>');
+                alert("Obrázok už existuje !");
+            }
+        });
+
+    });
+</script>
 

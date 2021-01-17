@@ -8,11 +8,14 @@
 
     <hr />
     <div class="container">
-        <h2 class="text-align-center">Úprava zariadenia</h2>
+        <hr class="mt-2" />
+        <div class="row justify-content-center">
+            <div class=" col-md-auto"><h2>Úprava Zariadenia</h2></div>
+        </div>
+        <hr />
         <form asp-action="Edit">
             <div class="row">
                 <div class="col-md-4">
-
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
                     <div class="form-group">
@@ -39,36 +42,37 @@
                     <div class="form-group">
                         <input type="submit" value="Save" class="btn btn-primary" />
                     </div>
-
-
                 </div>
+
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-6">
                             <dt class="col-sm">
                                 @Html.DisplayNameFor(model => model.ImagePath)
                             </dt>
-                            <dt class="col-sm">
-                                @Html.DisplayFor(model => model.ImagePath);
-                            </dt>
-                            <dd class="col-sm">
+                            <div class="col-sm">
                                 <img id="product-image mt-2" src="/UploadedImgs/ServisDevices/@Model.ImagePath" alt="Device Image" width="250" height="250">
+                            </div>
+                            <dt class="col-sm">
+                                @Html.DisplayFor(model => model.ImagePath)
+                            </dt>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <h4> Nahrať nový obrázok</h4>
                                 <div class="btn btn-primary mt-2 mb-2">
-                                    <input name="imguploader" type="file" id="imguploader" />
+                                    <input name="imguploader" type="file" id="imguploader"/>
                                 </div>
 
-                                <div id="imgPreview" class="thumbnail" style="display:none">
-                                    <img class="img-responsive" id="targetImg" width="250" height="250" />
+                                <div id="imgPreview" class="thumbnail" style="display: none">
+                                    <img class="img-responsive" id="targetImg" width="250" height="250"/>
                                     <div class="caption">
                                         <a href="#" onclick="ClearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
                                         <span id="description"></span>
                                     </div>
 
                                 </div>
+
                             </div>
 
                             <div class="row justify-content-md-between">

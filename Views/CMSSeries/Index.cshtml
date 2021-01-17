@@ -9,7 +9,12 @@
 
 
 <div class="container">
-    <h2>@ViewBag.BrandName</h2>
+    <hr class="mt-2" />
+    <div class="row  justify-content-center">
+        <div class=" col-12"><h2 class="text-align-center">@ViewBag.BrandName </h2></div>
+        <div class="col-auto align-items-center" > <img class="BrandLogo-CMS" src="/UploadedImgs/BrandLogo/@ViewBag.BrandLogo" alt="Brand Logo"></div>
+    </div>
+    <hr />
     <div class=" row justify-content-between">
         <div class="col-auto"><a asp-action="Create" class="btn btn-success mt-2" asp-route-id="@ViewBag.BrandId">Vytvoriť sériu</a></div>
         <div class="col-auto"><a asp-action="Index" asp-controller="CMSBrands" class="btn btn-outline-warning mt-2">Späť na značky</a></div>

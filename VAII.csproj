@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\UploadedImgs\BrandLogo\" />
     <Folder Include="wwwroot\UploadedImgs\ServisDevices\" />
   </ItemGroup>
 

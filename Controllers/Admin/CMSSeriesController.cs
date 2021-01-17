@@ -22,9 +22,15 @@ namespace VAII.Controllers.Admin
         // GET: Series
         public async Task<IActionResult> Index(int? id)
         {
+            var brand = _context.DeviceBrands.FirstOrDefault(b => b.Id == id);
             ViewBag.BrandId = id;
-            ViewBag.BrandName = _context.DeviceBrands.FirstOrDefault(b => b.Id == id)?.Name;
-            return View(await _context.BrandSeries.Where(bs=> bs.DeviceBrandId == id ).ToListAsync());
+            if (brand != null)
+            {
+                ViewBag.BrandName = brand.Name;
+                ViewBag.BrandLogo = brand.ImageLogoPath;
+            }
+
+            return View(await _context.BrandSeries.Where(bs=> bs.DeviceBrandId == id ).Include(s=>s.ServisDevices).ToListAsync());
         }
 
         // GET: Series/Details/5
@@ -97,6 +103,7 @@ namespace VAII.Controllers.Admin
             {
                 return NotFound();
             }
+            ViewBag.BrandId = series.DeviceBrandId;
             return View(series);
         }
 
@@ -111,7 +118,7 @@ namespace VAII.Controllers.Admin
             {
                 return NotFound();
             }
-
+            ViewBag.BrandId = series.DeviceBrandId;
             if (ModelState.IsValid)
             {
                 try
@@ -130,6 +137,7 @@ namespace VAII.Controllers.Admin
                         throw;
                     }
                 }
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(series);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccesLib.DataAccess;
 using DataAccesLib.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace VAII.Controllers.Admin
 {
@@ -88,9 +90,18 @@ namespace VAII.Controllers.Admin
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ImageLogoPath,Description")] DeviceBrand deviceBrand)
         {
+            string newImage = HttpContext.Request.Form["imguploader"];
+
+            
+
             if (id != deviceBrand.Id)
             {
                 return NotFound();
+            }
+            
+            if (!String.IsNullOrEmpty(newImage))
+            {
+                deviceBrand.ImageLogoPath = newImage;
             }
 
             if (ModelState.IsValid)
@@ -111,7 +122,7 @@ namespace VAII.Controllers.Admin
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                
             }
             return View(deviceBrand);
         }
@@ -148,6 +159,37 @@ namespace VAII.Controllers.Admin
         private bool DeviceBrandExists(int id)
         {
             return _context.DeviceBrands.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> InsertImage(IFormFile imgFile)
+        {
+
+            if (imgFile != null && imgFile.Length != 0)
+            {
+
+                var path = Path.Combine(
+                    Directory.GetCurrentDirectory(), "wwwroot", "UploadedImgs", "BrandLogo",
+                    imgFile.FileName);
+
+                if (!System.IO.File.Exists(path))
+                {
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await imgFile.CopyToAsync(stream);
+                    }
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+
+            }
+
+            return BadRequest();
+
+
         }
     }
 }

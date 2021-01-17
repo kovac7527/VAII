@@ -5,38 +5,162 @@
     Layout = "~/Views/Shared/_AdminCMSLayout.cshtml";
 }
 
-<h1>Edit</h1>
 
-<h4>DeviceBrand</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="container">
+    <hr class="mt-2" />
+    <div class="row justify-content-center">
+        <div class=" col-md-auto"><h2>Úprava Značky</h2></div>
+    </div>
+    <hr />
+    <form asp-action="Edit">
+        <div class="row">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="ImageLogoPath" class="control-label"></label>
-                <input asp-for="ImageLogoPath" class="form-control" />
-                <span asp-validation-for="ImageLogoPath" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+
+              <div class="col-md-8">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <dt class="col-sm">
+                              @Html.DisplayNameFor(model => model.ImageLogoPath)
+                          </dt>
+                          <div class="col-sm">
+                              <img class="BrandLogo-CMS" src="/UploadedImgs/BrandLogo/@Model.ImageLogoPath" alt="Brand Logo Image">
+                          </div>
+                          <dt class="col-sm">
+                              @Html.DisplayFor(model => model.ImageLogoPath)
+                          </dt>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <h4> Nahrať nový obrázok</h4>
+                                  <div class="btn btn-primary mt-2 mb-2">
+                                      <input name="imguploader" type="file" id="imguploader" />
+                                  </div>
+
+                                  <div id="imgPreview" class="thumbnail" style="display:none">
+                                      <img class="BrandLogo-CMS" id="targetImg"/>
+                                      <div class="caption">
+                                          <a href="#" onclick="ClearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
+                                          <span id="description"></span>
+                                      </div>
+
+                                  </div>
+                              </div>
+
+                              <div class="row justify-content-md-between">
+                                  <button id="btnUpload" type="button" class="d-block btn btn-outline-success m-3 left">Nahrať obrázok</button>
+                                  <div id="messageUpload" class="col-md-auto mx-auto">
+                                  </div>
+                              </div>
+                          </div>
+
+                      </div>
+
+
+                  </div>
+              </div>
+        
+    </form>
+
+    <div>
+        <a asp-action="Index" >Back to List</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script type="text/javascript">
 
+
+    $(document).ready(function () {
+
+        $("#imguploader").change(function () {
+
+            var File = this.files;
+
+            if (File && File[0]) {
+                ReadImage(File[0]);
+            }
+
+        })
+
+    })
+
+
+    var ReadImage = function (file) {
+
+        var reader = new FileReader;
+        var image = new Image;
+
+        reader.readAsDataURL(file);
+        reader.onload = function (_file) {
+
+            image.src = _file.target.result;
+            image.onload = function () {
+
+                var height = this.height;
+                var width = this.width;
+                var type = file.type;
+                var size = ~~(file.size / 1024) + "KB";
+
+                $("#targetImg").attr('src', _file.target.result);
+                $("#description").text("Size:" + size + ", " + height + "X " + width + ", " + type + "");
+                $("#imgPreview").show();
+
+            }
+
+        }
+
+    }
+
+    var ClearPreview = function () {
+        $("#messageUpload").val('');
+        $("#description").text('');
+        $("#imgPreview").hide();
+
+    }
+
+
+    $("#btnUpload").on("click", function () {
+
+        var imgFile = $("#imguploader")[0].files[0];
+
+        var data = new FormData();
+        data.append("imgFile", imgFile);
+        data.append("DeviceName", "SamsungS10");
+
+
+        $.ajax({
+            type: "Post",
+            url: "@Url.Action("InsertImage")",
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                $("#messageUpload").empty();
+                $("#messageUpload").append('<p class="alert-success"> Obrázok nahratý </p>');
+                alert('Obrázok úspešne nahratý na server !');
+            },
+            error: function (error) {
+                $("#messageUpload").empty();
+                $("#messageUpload").append('<p class="alert-danger mx-auto"> Obrázok už existuje </p>');
+                alert("Obrázok už existuje !");
+            }
+        });
+
+    });
+</script>

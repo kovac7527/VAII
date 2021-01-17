@@ -102,12 +102,14 @@
   
                     $.each(device, function (i, device) {  
                         $("#ServisDevices").append('<div class="col-md-3 d-inline-block product-item">' +
+                            '<a href="/Servis/Details/' + device.id + '">' +
                             '<div class="col-md-12 img-section d-flex ">' +
                             '<img id="product-image" src="/UploadedImgs/ServisDevices/'+ device.imagePath +  '" alt="Product image" >'+
                             '</div>'+
                             '<div class="col-md-12  image-title text-align-center">'+
                             '<h4>'+device.name+'</h4>'+
                             '</div>'+
+                            '</a>' +
                             '</div>');  
 
                     });  
