@@ -120,7 +120,6 @@
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
-    
 
     $(window).resize(function () {
 
@@ -133,15 +132,9 @@
 
     function checkScreenForFooter() {
 
-       
-
         $('main').css("margin-bottom",$('footer').outerHeight() + 20);
         console.log("Margin bottom is noow:" + $('main').css("margin-bottom"));
         $('.footer-down').css("bottom",  -($('footer').outerHeight()));
-        //console.log("Hide lenght is noow:" + $('.footer-down').css("bottom"));
-        //console.log("footer height:"+$('footer').outerHeight());
-        //console.log("document height:" +$(document).height());
-        //console.log("w height:" +$(window).height());
         if ($(document).height() <= $(window).height()){
             $('footer').removeClass('footer-down').addClass('footer-up');
             $('.footer-up').css("bottom",  0);
@@ -165,12 +158,11 @@
     function hasScrolled() {
         var st = $(this).scrollTop();
     
-        // Make sure they scroll more than delta
+       
         if(Math.abs(lastScrollTop - st) <= delta)
             return;
     
-        // If they scrolled down and are past the navbar, add class .nav-up.
-        // This is necessary so you never see what is "behind" the navbar.
+     
         if (($(window).scrollTop() + $(window).height()) >= $(document).height() - $('footer').outerHeight()/2 ){
             // Scroll Down
             $('footer').removeClass('footer-down').addClass('footer-up');

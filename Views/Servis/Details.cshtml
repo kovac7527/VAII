@@ -15,50 +15,37 @@
 
         <div class="col-12 text-center align-middle mt-2 ">
             <hr />
-            <div class="row justify-content-center mt-4">
-                <a onclick="description('1')" href="#" class="col-md-8">
-                    <div class="servisAction"> <span>Some servis action</span></div>
-                </a>
-            </div>
-            <div id="1" style="display: none" class="row">
-                SOME TEXT HERE
-            </div>
 
-            <div class="row justify-content-center mt-4">
-                <a onclick="description('2')" href="#" class="col-md-8">
-                    <div class="servisAction"> <span>Some servis action</span></div>
-                </a>
-            </div>
-            <div id="2" style="display: none" class="row">
-                SOME TEXT HERE
-            </div>
+            @foreach (var action in Model.ServisActions)
+            {
+                <div class="row justify-content-center mt-4">
+                    <a class="col-md-8" data-toggle="collapse" aria-expanded="false" aria-controls="a@(action.Id)" href="#a@(action.Id)">
+                        <div class="servisAction  btn btn-primary"> <span>@action.Name</span></div>
+                    </a>
+                </div>
+                <div class="collapse" id="a@(action.Id)">
+                    <div class="card card-body">
+                        <table class="servisActionTable" width="100%">
+                            <tr>
+                                <td>Náročnosť </td>
+                                <td>Trvanie opravy</td>
+                                <td>Cena</td>
+                            </tr>
 
-            <div class="row justify-content-center mt-4">
-                <a onclick="description('3')" href="#" class="col-md-8">
-                    <div class="servisAction"> <span>Some servis action</span></div>
-                </a>
-            </div>
-            <div id="3" style="display: none" class="row">
-                SOME TEXT HERE
-            </div>
+                            <tr>
+                                <td>@action.DifficultyLevel</td>
+                                <td>@action.HoursTofix hod.</td>
+                                <td>@action.Price € </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+
+            }
 
 
         </div>
-        @foreach (var action in Model.ServisActions)
-        {
-            <div class="row justify-content-center mt-4">
-                <a onclick="description('@action.Id')" href="#" class="col-md-8">
-                    <div class="servisAction"> <span>@action.Name</span></div>
-                </a>
-            </div>
-            <div id="@action.Id" style="display: none" class="row">
-                @action.Description
-            </div>
-
-        }
-
-
-    </div>
 
     <div class="row justify-content-center ">
         <div class="col-auto ">

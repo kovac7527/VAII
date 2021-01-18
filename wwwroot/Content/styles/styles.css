@@ -16,6 +16,16 @@
     background-color: #bbbbbb;
 }
 
+.servisActionTable {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.servisActionTable td {
+    
+    width: 33%;
+}
+
 .servisAction {
     display: table;
     height: 45px;

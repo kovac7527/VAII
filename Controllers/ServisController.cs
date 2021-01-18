@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccesLib.DataAccess;
+using DataAccesLib.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VAII.Models;
@@ -19,6 +20,11 @@ namespace VAII.Controllers
         }
         public async Task<IActionResult> Index(int? id)
         {
+
+
+            List<ServisAction> actionList = new List<ServisAction>();
+
+            
             ServisModel model = new ServisModel();
             
             var brands = await _context.DeviceBrands.ToListAsync();
@@ -82,6 +88,100 @@ namespace VAII.Controllers
         {
             var devices = _context.ServisDevices.Where(s => s.SeriesId == id).ToList();
             return Json(devices);
+            
+        }
+
+        public async void GenerateServisActions()
+        {
+            List<ServisAction> actionList = new List<ServisAction>();
+
+            actionList.Add(new ServisAction()
+            {
+                Name = "Výmena LCD",
+                HoursTofix = 1,
+                DifficultyLevel = 2,
+            });
+
+            actionList.Add(new ServisAction()
+            {
+                Name = "Výmena Batérie",
+                HoursTofix = 1,
+                DifficultyLevel = 1,
+
+            });
+
+            actionList.Add(new ServisAction()
+            {
+                Name = "Výmena Zadného krytu",
+                HoursTofix = 1,
+                DifficultyLevel = 1,
+
+            });
+
+
+            actionList.Add(new ServisAction()
+            {
+                Name = "Obliatie tekutinou",
+                HoursTofix = 5,
+                DifficultyLevel = 4,
+
+            });
+
+            actionList.Add(new ServisAction()
+            {
+                Name = "Oprava nefunkčného mikrofónu",
+                HoursTofix = 5,
+                DifficultyLevel = 4,
+
+            });
+
+            actionList.Add(new ServisAction()
+            {
+                Name = "Oprava nefunkčného reproduktoru",
+                HoursTofix = 2,
+                DifficultyLevel = 3,
+
+            });
+
+            actionList.Add(new ServisAction()
+            {
+                Name = "Oprava nefunkčnej kamery",
+                HoursTofix = 1,
+                DifficultyLevel = 3,
+
+            });
+
+            actionList.Add(new ServisAction()
+            {
+                Name = "Oprava nabíjania",
+                HoursTofix = 4,
+                DifficultyLevel = 5,
+
+            });
+
+            actionList.Add(new ServisAction()
+            {
+                Name = "Oprava matičnej dosky",
+                HoursTofix = 99,
+                DifficultyLevel = 5,
+
+            });
+
+
+            var devices = _context.ServisDevices.ToList();
+
+            foreach (var device in devices)
+            {
+                foreach (var action in actionList)
+                {
+                    action.Id = 0;
+                    action.ServisDeviceId = device.Id;
+                }
+
+                _context.ServisActions.AddRange(actionList);
+                await _context.SaveChangesAsync();
+
+            }
             
         }
     }
