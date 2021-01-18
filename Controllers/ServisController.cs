@@ -31,9 +31,31 @@ namespace VAII.Controllers
             }
 
             ViewBag.Brands = liListOfBrands;
-            var AllBrands = await _context.DeviceBrands.Include(b=>b.SeriesList).ThenInclude(s=>s.ServisDevices).ToListAsync();
-            return View(model);
+            ViewBag.BrandId = 0;
+            ViewBag.BrandSeries = 0;
+            var actualSeries =  _context.BrandSeries.Include(d=>d.ServisDevices).FirstOrDefault(s => s.Id == id);
+            if (actualSeries != null)
+            {
+                ViewBag.BrandId = actualSeries.DeviceBrandId;
+                ViewBag.BrandSeries = actualSeries.Id;
+                
+            }
+            
+            return View(actualSeries);
         }
+
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            
+
+            var device = _context.ServisDevices.Include(d => d.ServisActions).FirstOrDefault(d => d.Id == id);
+            
+            List<SelectListItem> liListOfBrands = new List<SelectListItem>();
+           
+            return View(device);
+        }
+
 
         public JsonResult GetSeries(int id)
         { 

@@ -1,4 +1,4 @@
-﻿@model VAII.Models.ServisModel
+﻿@model DataAccesLib.Models.Series
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
@@ -15,11 +15,11 @@
                 <div class="col-md-4">
 
                     <label for="device_brand_selection">Značka zariadenia:</label>
-                    @Html.DropDownList("Brand", ViewBag.Brands as List<SelectListItem>,new
-                    {
-                       @class ="form-control"
+                    @Html.DropDownList("Brand", ViewBag.Brands as List<SelectListItem>, new
+               {
+                   @class = "form-control"
 
-                    })
+               })
                     @*<select class="form-control" id="device_brand_selection">
                         @foreach(var item in Model.DeviceBrands)
                             {
@@ -33,10 +33,10 @@
                 <div class=" col-md-4">
                     <label for="device_series_selection">Séria zariadenia</label>
                    @Html.DropDownList("Series", new SelectList(string.Empty, "Value", "Text"), new
-                   {
-                       @class ="form-control"
+              {
+                  @class = "form-control"
 
-                   })
+              })
                     <!--<select class="form-control" id="Series">-->
                         @*@foreach (var item in Model.DeviceSeries)
                         {
@@ -56,71 +56,89 @@
 <div class="container align-items-center">
     <div class="row flex-row" id="ServisDevices">
 
-       
-
-
     </div>
 
 </div>
 
 
-<script type="text/javascript">  
-  
-  
-    $(document).ready(function () {  
-  
-        $("#Brand").change(function () {  
-            $("#Series").empty();  
-            $.ajax({  
-                type: 'POST',  
-                url: '@Url.Action("GetSeries")',  
-                dataType: 'json',  
-                data: { id: $("#Brand").val() },  
-                success: function (series) {  
-  
-                    $.each(series, function (i, series) {  
-                        $("#Series").append('<option value="'  
-                            + series.value + '">'  
-                            + series.text + '</option>');  
-                    });  
-                },  
-                error: function (ex) {  
-                    alert('Failed.' + ex);  
-                }  
-            });  
-            return false;  
-        })  
+<script type="text/javascript">
 
-        $("#Series").change(function () {  
-            $("#ServisDevices").empty();  
-            $.ajax({  
-                type: 'POST',  
-                url: '@Url.Action("GetDevices")',  
-                dataType: 'json',  
-                data: { id: $("#Series").val() },  
-                success: function (device) {  
-  
-                    $.each(device, function (i, device) {  
-                        $("#ServisDevices").append('<div class="col-md-3 d-inline-block product-item">' +
-                            '<a href="/Servis/Details/' + device.id + '">' +
-                            '<div class="col-md-12 img-section d-flex ">' +
-                            '<img id="product-image" src="/UploadedImgs/ServisDevices/'+ device.imagePath +  '" alt="Product image" >'+
-                            '</div>'+
-                            '<div class="col-md-12  image-title text-align-center">'+
-                            '<h4>'+device.name+'</h4>'+
-                            '</div>'+
-                            '</a>' +
-                            '</div>');  
 
-                    });  
-                },  
-                error: function (ex) {  
-                    alert('Failed.' + ex);  
-                }  
-            });  
-            return false;  
-        })  
-    });  
+
+    $(document).ready(function () {
+
+        $("#Series").change(getDevices);
+        $("#Brand").change(getSeries);
+
+
+        $("#Brand").val("@ViewBag.BrandId");
+        getSeries();
+
+        $("#Series").val("@ViewBag.BrandSeries");
+     function getSeries() {
+         $("#Series").empty();
+         $.ajax({
+             type: 'POST',
+             url: '@Url.Action("GetSeries")',
+             dataType: 'json',
+             data: { id: $("#Brand").val() },
+             success: function(series) {
+
+                 $.each(series,
+                     function(i, series) {
+                         $("#Series").append('<option value="' + series.value + '">' + series.text + '</option>');
+
+                     });
+                 $("#Series").val("@ViewBag.BrandSeries");
+                 getDevices();
+             },
+             error: function(ex) {
+                 alert('Failed.' + ex);
+             }
+         });
+         return false;
+     }
+
+     function getDevices() {
+         $("#ServisDevices").empty();
+         $.ajax({
+             type: 'POST',
+             url: '@Url.Action("GetDevices")',
+             dataType: 'json',
+             data: { id: $("#Series").val() },
+             success: function(device) {
+
+                 $.each(device,
+                     function(i, device) {
+                         $("#ServisDevices").append('<div class="col-md-3 d-inline-block product-item">' +
+                             '<a href="/Servis/Details/' +
+                             device.id +
+                             '">' +
+                             '<div class="col-md-12 img-section d-flex ">' +
+                             '<img id="product-image" src="/UploadedImgs/ServisDevices/' +
+                             device.imagePath +
+                             '" alt="Product image" >' +
+                             '</div>' +
+                             '<div class="col-md-12  image-title text-align-center">' +
+                             '<h4>' +
+                             device.name +
+                             '</h4>' +
+                             '</div>' +
+                             '</a>' +
+                             '</div>');
+
+                     });
+             },
+             error: function(ex) {
+                 alert('Failed.' + ex);
+             }
+         });
+         return false;
+     };
+    });
+
+
+
 </script>   
 
 

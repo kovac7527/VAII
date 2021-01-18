@@ -12,6 +12,27 @@
         background-color: #fff;
     }
 }
+.servisAction:hover {
+    background-color: #bbbbbb;
+}
+
+.servisAction {
+    display: table;
+    height: 45px;
+    width: 100%;
+    border: 4px solid #007bff !important;
+    border-width: 10px;
+    border-radius: 15px;
+}
+
+    .servisAction span {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+.DeviceDetailIMG {
+
+}
 
 .BrandLogo-CMS {
     max-width: 100%;
