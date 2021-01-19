@@ -19,6 +19,7 @@ namespace VAII.Controllers.Admin
         public CMSBrandsController(DataContext context)
         {
             _context = context;
+            
         }
 
         // GET: CMSBrands
@@ -191,5 +192,6 @@ namespace VAII.Controllers.Admin
 
 
         }
+
     }
 }

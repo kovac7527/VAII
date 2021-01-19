@@ -22,15 +22,18 @@
         <div class="form-group">
             <label asp-for="Name"></label>
             <input asp-for="Name" type="text" class="form-control" placeholder="Zadaj názov zaradenia" required>
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Model"></label>
             <input asp-for="Model" type="text" class="form-control" placeholder="Zadaj kód označenia modelu" required>
+            <span asp-validation-for="Model" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Description"></label>
             <input asp-for="Description" type="text" class="form-control" placeholder="Zadaj popis" rows="10">
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="col-md-9 form-group">
 

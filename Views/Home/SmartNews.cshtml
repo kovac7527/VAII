@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DataAccesLib.Models.SmartBlogItem>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "SmartNews";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>SmartNews</h1>
+
+
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class=" mt-2   ">
+            <h2 class="m-3">@item.Heading</h2>
+            <p>
+                @item.text.Substring(0,Math.Min(200,(item.text.Length-10)))<span id="dots">...</span>
+            </p>
+            <a class="btn btn-outline-info" asp-action="NewsDetail" asp-route-id="@item.id"> Čítať viac </a>
+            <div>
+                <span class="badge">@item.Created</span>
+                <div class="pull-right">
+                    <span class="text-info">Author :</span> <span class="text-info">@item.Author</span>
+                </div>
+            </div>
+            <hr>
+        </div>
+    }
+
+</div>

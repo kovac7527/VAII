@@ -13,7 +13,11 @@
     }
 }
 .servisAction:hover {
-    background-color: #bbbbbb;
+    background-color: rgb(21, 234, 35);
+}
+
+.smartNewsItem {
+    max-height:  100px;
 }
 
 .servisActionTable {

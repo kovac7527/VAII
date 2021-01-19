@@ -21,10 +21,7 @@ namespace VAII.Controllers
         public async Task<IActionResult> Index(int? id)
         {
 
-
-            List<ServisAction> actionList = new List<ServisAction>();
-
-            
+           
             ServisModel model = new ServisModel();
             
             var brands = await _context.DeviceBrands.ToListAsync();
@@ -100,6 +97,7 @@ namespace VAII.Controllers
                 Name = "Výmena LCD",
                 HoursTofix = 1,
                 DifficultyLevel = 2,
+                Price = 45
             });
 
             actionList.Add(new ServisAction()
@@ -107,6 +105,7 @@ namespace VAII.Controllers
                 Name = "Výmena Batérie",
                 HoursTofix = 1,
                 DifficultyLevel = 1,
+                Price = 35
 
             });
 
@@ -115,6 +114,7 @@ namespace VAII.Controllers
                 Name = "Výmena Zadného krytu",
                 HoursTofix = 1,
                 DifficultyLevel = 1,
+                Price = 20
 
             });
 
@@ -124,6 +124,7 @@ namespace VAII.Controllers
                 Name = "Obliatie tekutinou",
                 HoursTofix = 5,
                 DifficultyLevel = 4,
+                Price = 40
 
             });
 
@@ -132,6 +133,7 @@ namespace VAII.Controllers
                 Name = "Oprava nefunkčného mikrofónu",
                 HoursTofix = 5,
                 DifficultyLevel = 4,
+                Price = 90
 
             });
 
@@ -140,6 +142,7 @@ namespace VAII.Controllers
                 Name = "Oprava nefunkčného reproduktoru",
                 HoursTofix = 2,
                 DifficultyLevel = 3,
+                Price = 60
 
             });
 
@@ -148,7 +151,7 @@ namespace VAII.Controllers
                 Name = "Oprava nefunkčnej kamery",
                 HoursTofix = 1,
                 DifficultyLevel = 3,
-
+                Price = 20
             });
 
             actionList.Add(new ServisAction()
@@ -156,7 +159,7 @@ namespace VAII.Controllers
                 Name = "Oprava nabíjania",
                 HoursTofix = 4,
                 DifficultyLevel = 5,
-
+                Price = 60
             });
 
             actionList.Add(new ServisAction()
@@ -164,6 +167,7 @@ namespace VAII.Controllers
                 Name = "Oprava matičnej dosky",
                 HoursTofix = 99,
                 DifficultyLevel = 5,
+                Price = 180
 
             });
 

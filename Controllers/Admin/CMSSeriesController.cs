@@ -17,6 +17,7 @@ namespace VAII.Controllers.Admin
         public CMSSeriesController(DataContext context)
         {
             _context = context;
+           
         }
 
         // GET: Series
@@ -73,21 +74,27 @@ namespace VAII.Controllers.Admin
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Description,DeviceBrandId")] Series series, int? id)
         {
-           DeviceBrand brand = _context.DeviceBrands.FirstOrDefault(b => b.Id == id);
-           brand.SeriesList = new List<Series>();
-           
-           if (brand != null)
-           {
-               brand.SeriesList.Add(series);
-               
-               await _context.SaveChangesAsync();
-               return RedirectToAction("Index", new{ id = id });
-           }
+            series.ServisDevices= new List<ServisDevice>();
+            ViewBag.BrandID = id;
+            ViewBag.BrandName = _context.DeviceBrands.FirstOrDefault(b => b.Id == id)?.Name;
+            if (ModelState.IsValid){
+                DeviceBrand brand = _context.DeviceBrands.FirstOrDefault(b => b.Id == id);
+                brand.SeriesList = new List<Series>();
 
-           
+                brand.SeriesList.Add(series);
+               
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", new{ id = id });
+
+            }
+            else
+            {
+                
+                return View(series);
+            }
             
            
-           return View(series);
+            
         }
 
         // GET: Series/Edit/5
@@ -176,5 +183,7 @@ namespace VAII.Controllers.Admin
         {
             return _context.BrandSeries.Any(e => e.Id == id);
         }
+
+       
     }
 }

@@ -16,10 +16,12 @@
         <div class="form-group">
             <label asp-for="DeviceBrandId"></label>
             <input asp-for="DeviceBrandId" type="text" value="@ViewBag.BrandId" class="form-control" placeholder="Zadaj názov novej série" disabled="disabled">
+            
         </div>
         <div class="form-group">
             <label asp-for="Name"></label>
             <input asp-for="Name" type="text" class="form-control" placeholder="Zadaj názov novej série" required>
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Description"></label>

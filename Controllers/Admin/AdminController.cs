@@ -32,15 +32,11 @@ namespace VAII.Controllers
         }
 
         [HttpPost]
-        public ActionResult Authorise(AdminUser user)
+        [ValidateAntiForgeryToken]
+        public ActionResult Authorise([Bind("UserName,Password")] AdminUser user)
         {
+            if (!ModelState.IsValid) return View("Index",user);
             var foundUser = _dbContext.AdminsUsers.FirstOrDefault(u => u.UserName.Equals(user.UserName) && u.Password.Equals(user.Password));
-            //if (HttpContext.Session.TryGetValue("username", out var name))
-            //{
-            //    TempData["msg"] = $"You are logged session is set {System.Text.Encoding.Default.GetString(name)}";
-            //    return View("Index");
-            //}
-
             if (foundUser == null)
             {
                 //bad login
@@ -49,19 +45,20 @@ namespace VAII.Controllers
             }
             else
             {
-                HttpContext.Session.SetString("username", user.UserName);
+                HttpContext.Session.SetString("user", user.UserName);
                 TempData["user"] = user.UserName;
                 return RedirectToAction("Cms");
             }
 
-            
-            
+
+
+
         }
 
         [HttpGet]
         public IActionResult Logout()
         {
-            HttpContext.Session.Remove("username");
+            HttpContext.Session.Remove("user");
             return RedirectToAction("Index");
         }
 
@@ -100,7 +97,7 @@ namespace VAII.Controllers
         private bool IsLoggedIn()
         {
             
-            if (HttpContext.Session.TryGetValue("username", out var name))
+            if (HttpContext.Session.TryGetValue("user", out var name))
             {
                 TempData["user"] = System.Text.Encoding.Default.GetString(name);
                 return true;

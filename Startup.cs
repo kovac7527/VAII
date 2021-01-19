@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using  DataAccesLib.DataAccess;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 
@@ -52,8 +53,41 @@ namespace VAII
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseSession();
+            app.Use(async (context, next) =>
+            {
+                var paths = new[]
+                {
+                    "/Admin/Cms",
+                    "/CMSSeries",
+                    "/CMSBrands",
+                    "/CMSServisDevices",
+                };
+                bool lockedPath = false;
+                string currentUserIdSession = context.Session.GetString("user");
+                foreach (var path in paths)
+                {
+                    if (context.Request.Path.Value.Contains(path))
+                    {
+                        lockedPath = true;
+                        break;
+                    }
+                }
+                if (lockedPath)
+                {
+                    
+                    if (string.IsNullOrEmpty(currentUserIdSession))
+                    {
+                        var path = $"/Admin";
+                        context.Response.Redirect(path);
+                        return;
+                    }
+
+                }
+                await next();
+            });
+
+
 
             app.UseRouting();
 

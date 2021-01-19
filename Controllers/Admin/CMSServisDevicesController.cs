@@ -24,6 +24,8 @@ namespace VAII.Controllers.Admin
         {
             _webHostEnvironment= webHostEnvironment;
             _context = context;
+
+            
         }
 
         // GET: CMSServisDevices
@@ -84,18 +86,28 @@ namespace VAII.Controllers.Admin
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Model,Name,ImagePath")] ServisDevice servisDevice, int? id)
         {
-           
-            Series series = _context.BrandSeries.FirstOrDefault(s => s.Id == id);
-            
 
-            if (series != null)
+            if (ModelState.IsValid)
             {
-                series.ServisDevices = new List<ServisDevice>();
-                series.ServisDevices.Add(servisDevice);
+                    Series series = _context.BrandSeries.FirstOrDefault(s => s.Id == id);
+                
 
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", new { id = id });
+                if (series != null)
+                {
+                    series.ServisDevices = new List<ServisDevice>();
+                    series.ServisDevices.Add(servisDevice);
+
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", new { id = id });
+                }
             }
+            else
+            {
+                ViewBag.SeriesId = id;
+                ViewBag.SeriesName = _context.BrandSeries.FirstOrDefault(b => b.Id == id)?.Name;
+                return View("Create",servisDevice);
+            }
+            
 
 
 
@@ -229,5 +241,8 @@ namespace VAII.Controllers.Admin
 
 
         }
+
+
+      
     }
 }
