@@ -151,6 +151,10 @@ h3{
 
 }
 
+    .counter-box :hover {
+        color: RGBA(98, 186, 68, 0.82);
+    }
+
 .counter-box i {
     font-size: 60px;
     margin: 0 0 15px;

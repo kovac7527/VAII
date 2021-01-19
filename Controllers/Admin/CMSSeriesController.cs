@@ -176,7 +176,7 @@ namespace VAII.Controllers.Admin
             var series = await _context.BrandSeries.FindAsync(id);
             _context.BrandSeries.Remove(series);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", new { id = series.DeviceBrandId});
         }
 
         private bool SeriesExists(int id)

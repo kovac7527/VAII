@@ -201,7 +201,7 @@ namespace VAII.Controllers.Admin
             var servisDevice = await _context.ServisDevices.FindAsync(id);
             _context.ServisDevices.Remove(servisDevice);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", new { id = servisDevice.SeriesId });
         }
 
         private bool ServisDeviceExists(int id)

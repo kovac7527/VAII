@@ -69,7 +69,7 @@
                 <div class="col-md-6 col-lg-7 text-center text-md-right t">
 
                     <!-- Facebook -->
-                    <a>
+                    <a href="https://www.facebook.com/ProFixSK">
                         <i class="fa fa-facebook-square text-white mr-2"> </i>
                     </a>
                     <!-- Twitter -->
@@ -119,11 +119,9 @@
 <script type="text/javascript">
     // Hide Header on on scroll down
     var didScroll;
-    var lastScrollTop = 0;
-    var delta = 5;
+    
 
     $(window).resize(function () {
-
         checkScreenForFooter();
     });
 
@@ -132,7 +130,6 @@
     });
 
     function checkScreenForFooter() {
-
         $('main').css("margin-bottom",$('footer').outerHeight() + 20);
         console.log("Margin bottom is noow:" + $('main').css("margin-bottom"));
         $('.footer-down').css("bottom",  -($('footer').outerHeight()));
@@ -140,8 +137,7 @@
             $('footer').removeClass('footer-down').addClass('footer-up');
             $('.footer-up').css("bottom",  0);
         }
-        return;
-    }
+        return; }
 
     $(window).scroll(function(event){
         didScroll = true;
@@ -158,10 +154,7 @@
 
     function hasScrolled() {
         var st = $(this).scrollTop();
-    
-       
-        if(Math.abs(lastScrollTop - st) <= delta)
-            return;
+        console.log("scroltop" + st);
     
      
         if (($(window).scrollTop() + $(window).height()) >= $(document).height() - $('footer').outerHeight()/2 ){
@@ -176,7 +169,7 @@
             }
         }
     
-        lastScrollTop = st;
+       
     }
 </script>
     @RenderSection("scripts", required: false)
